@@ -1,0 +1,36 @@
+import { PathReporter } from 'io-ts/lib/PathReporter';
+import { ValidationError } from './errors';
+import * as io from 'io-ts'
+import { pipe } from 'fp-ts/function'
+import * as E from 'fp-ts/Either'
+
+export const AppConfigT = io.type({
+	port: io.string,
+	db_host: io.string,
+	db_port: io.string,
+	db_user_name: io.string,
+	db_password: io.string,
+})
+
+export const readConfig =
+	(variablesToRead: ReadonlyArray<string>) => (env: NodeJS.ProcessEnv) =>
+		variablesToRead.reduce(
+			(acc, variable) => ({ ...acc, [variable]: env[variable] }),
+			{},
+		)
+
+export const readMyConfig = readConfig([
+	'port',
+	'db_host',
+	'db_user_name',
+	'db_port',
+	'db_password',
+])
+
+export const validateConfig = (cfgToValidate: unknown) =>
+	pipe(
+		AppConfigT.validate(cfgToValidate, io.getDefaultContext(AppConfigT)),
+		E.mapLeft(
+			(err) => new ValidationError(PathReporter.report(E.left(err)).join('\n')),
+		),
+	)

@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"sourceMap": true,
+		"strict": true,
+		"noImplicitReturns": true,
+		"noImplicitAny": true,
+		"module": "CommonJS",
+		"moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+		"target": "es5",
+		"allowJs": true,
+		"jsx": "react",
+		"paths": {
+			"@client/*": ["./src/client/*"],
+			"@server/*": ["./src/server/*"],
+			"@cli/*": ["./src/cli/*"],
+			"@core/*": ["./src/core/*"]
+		}
+	},
+	"include": ["./src/**/*"]
+}
