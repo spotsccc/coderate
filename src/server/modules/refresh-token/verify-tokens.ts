@@ -19,13 +19,12 @@ import {
 export const verifyTokens = ({ req, config, db }: Context) =>
 	pipe(
 		verifyAccessToken(config.jwt_secret)(req.cookies.accessToken as string),
-		E.map(({id}) => id),
+		E.map(({ id }) => id),
 		TE.fromEither,
 		TE.match(
 			() =>
 				pipe(
 					getRefreshToken(db)(req.cookies.refreshToken as string),
-					TE.map(e => {console.log(e, 123, 123);return e}),
 					TE.chainEitherK(isRefreshTokenValid),
 					TE.chainW((t) =>
 						pipe(
@@ -34,7 +33,6 @@ export const verifyTokens = ({ req, config, db }: Context) =>
 						),
 					),
 					TE.chain((t) => saveRefreshTokenToken(t)(db)),
-					TE.map(e => {console.log(e);return e}),
 					TE.map((t) => ({
 						refreshToken: t.token,
 						accessToken: generateAccessToken(config.jwt_secret)(t.id),
