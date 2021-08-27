@@ -1,5 +1,11 @@
 import { FastifyInstance } from 'fastify'
+import { taskEither as TE, option as O } from 'fp-ts'
 import { ControllerOptions, Method, Routes } from './types'
+
+export type Result<Error = unknown, Res = unknown> = Readonly<{
+	error?: Error
+	response?: Res
+}>
 
 export const createController =
 	(options: ControllerOptions) =>
@@ -7,16 +13,79 @@ export const createController =
 	(fastify: FastifyInstance) => {
 		routes.forEach((route) => {
 			const path = `/${options.url}/${route.path}`
-			console.log(path)
 			switch (route.method) {
 				case Method.GET:
-					fastify.get(path, route.handler)
+					fastify.get(path, (req, rep) =>
+						TE.match(
+							(error): Result => {
+								console.log(error)
+								return { error: (error as Error).message }
+							},
+							(response): Result => ({ response: response }),
+						)(
+							route.handler({
+								db: fastify.pg,
+								req,
+								rep,
+								config: { jwt_secret: 'secret' } as any,
+								userId: O.none,
+							}),
+						)(),
+					)
 				case Method.POST:
-					fastify.post(path, route.handler)
+					fastify.post(path, (req, rep) =>
+						TE.match(
+							(error): Result => {
+								console.log(error)
+								return { error: (error as Error).message }
+							},
+							(response): Result => ({ response: response }),
+						)(
+							route.handler({
+								db: fastify.pg,
+								req,
+								rep,
+								config: { jwt_secret: 'secret' } as any,
+								userId: O.none,
+							}),
+						)(),
+					)
 				case Method.DELETE:
-					fastify.delete(path, route.handler)
+					fastify.delete(path, (req, rep) =>
+						TE.match(
+							(error): Result => {
+								console.log(error)
+								return { error: (error as Error).message }
+							},
+							(response): Result => ({ response: response }),
+						)(
+							route.handler({
+								db: fastify.pg,
+								req,
+								rep,
+								config: { jwt_secret: 'secret' } as any,
+								userId: O.none,
+							}),
+						)(),
+					)
 				case Method.PUT:
-					fastify.put(path, route.handler)
+					fastify.put(path, (req, rep) =>
+						TE.match(
+							(error): Result => {
+								console.log(error)
+								return { error: (error as Error).message }
+							},
+							(response): Result => ({ response: response }),
+						)(
+							route.handler({
+								db: fastify.pg,
+								req,
+								rep,
+								config: { jwt_secret: 'secret' } as any,
+								userId: O.none,
+							}),
+						)(),
+					)
 			}
 		})
 	}

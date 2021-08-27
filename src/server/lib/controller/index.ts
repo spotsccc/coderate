@@ -1,2 +1,2 @@
 export { createController } from './create-controller'
-export { Route, Routes, ControllerOptions, Method } from './types'
+export { Route, Routes, ControllerOptions, Method, Database, Context } from './types'

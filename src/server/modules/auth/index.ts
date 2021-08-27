@@ -1,1 +1,2 @@
-export {authController} from './controller'
+export { authController } from './controller'
+export { Tokens } from './types'

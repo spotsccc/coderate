@@ -1,4 +1,11 @@
-import { ControllerOptions, createController, Routes, Method } from '../../lib/controller'
+import {
+	ControllerOptions,
+	createController,
+	Routes,
+	Method,
+} from '@server/lib/controller'
+import { signUp } from './sign-up'
+import { login } from './login'
 
 const controllerOptions: ControllerOptions = {
 	url: 'api/auth',
@@ -8,14 +15,12 @@ const routes: Routes = [
 	{
 		path: 'login',
 		method: Method.POST,
-		handler: async () => {
-			return 'hello world'
-		}
+		handler: login,
 	},
 	{
 		path: 'sign-up',
 		method: Method.POST,
-		handler: () => {}
+		handler: signUp,
 	},
 ]
 

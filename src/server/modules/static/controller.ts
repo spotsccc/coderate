@@ -1,20 +1,11 @@
-import { createController, Method, Routes } from "../../lib/controller";
+import { createController, Method, Routes } from "@server/lib/controller";
 
 const routes: Routes = [
 	{
 		path: 'bundle.js',
 		method: Method.GET,
-		handler: (_, rep) => {
-			rep.sendFile('bundle.js')
-		}
+		handler: ctx => async () => ctx.rep.sendFile('bundle.js')
 	},
-	{
-		path: '*',
-		method: Method.GET,
-		handler: (_, rep) => {
-			rep.sendFile('index.html')
-		}
-	}
 ]
 
 export const staticController = createController({url: 'app'})(routes)

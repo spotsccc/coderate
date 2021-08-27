@@ -1,7 +1,5 @@
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 import * as React from 'react'
+import { App } from './app'
 
-const element = <div>123123</div>
-
-console.log(document.getElementById('app'))
-render(element, document.getElementById('app'))
+render(<App />, document.getElementById('app'))
