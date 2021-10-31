@@ -1,4 +1,4 @@
-export { createApiCall } from './create-api-call'
-export { createSafeApiCall } from './create-safe-call'
-export { createSafeCallFactory } from './create-safe-call-factory'
-export { setApiConfig, Methods, ApiConfig } from './api-config'
+export * from './create-api-call'
+export * from './create-safe-call'
+export * from './create-safe-call-factory'
+export * from './api-config'
