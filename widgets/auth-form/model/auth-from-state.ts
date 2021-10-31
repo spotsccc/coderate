@@ -6,17 +6,17 @@ import {
 	split,
 	createStore,
 } from 'effector'
-import { login, signUp } from '@client/shared/lib/api'
+import { login, signUp } from '@/shared/lib/api'
 import {
 	checkEmail,
 	checkLogin,
 	checkPassword,
 	checkRepeatPassword,
 	validateForm,
-} from '@client/widgets/auth-form/model/check-valid-helpers'
+} from '@/widgets/auth-form/model/check-valid-helpers'
 import { flow } from 'fp-ts/function'
-import { not } from '@client/shared/lib/fp'
-import { splitFt } from '@client/shared/lib/effector/match'
+import { not } from '@/shared/lib/fp'
+import { splitFt } from '@/shared/lib/effector/match'
 
 export enum AuthState {
 	login = 'login',
