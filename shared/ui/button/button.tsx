@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React, { FC } from 'react'
-import { Size } from '@client/shared/ui/constants'
+import { Size } from '@/shared/ui/constants'
+
 import { StyledProps, ButtonProps, ButtonColor } from './types'
 import { buttonColors, buttonSizes } from './constants'
 

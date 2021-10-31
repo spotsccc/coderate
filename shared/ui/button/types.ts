@@ -1,4 +1,4 @@
-import { Size } from '@client/shared/ui/constants/size'
+import { Size } from '@/shared/ui/constants/size'
 
 export enum ButtonColor {
 	white = 'white',
