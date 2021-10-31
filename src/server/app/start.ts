@@ -5,7 +5,7 @@ import postgres from 'fastify-postgres'
 import * as Console from 'fp-ts/Console'
 import fastifyStatic from 'fastify-static'
 import { join } from 'path'
-import { ValidationError } from '@server/shared/errors';
+import { ValidationError } from '@server/shared/errors'
 import { taskEither as TE, readerTaskEither as RTE } from 'fp-ts'
 import { createConnectionString } from './db'
 import { AppConfig } from './types'
@@ -31,7 +31,6 @@ export const startServer = (config: AppConfig) => (server: FastifyInstance) =>
 			res.sendFile('index.html')
 		})
 
-		server.get
 		return server.listen(config.port)
 	}, ValidationError.of)
 

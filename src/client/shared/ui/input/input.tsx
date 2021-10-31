@@ -22,7 +22,7 @@ const Error = styled.span`
 	color: ${colors.red};
 	font-size: ${fonts.s.size};
 	height: 18px;
-	margin-top: ${indents[1]}
+	margin-top: ${indents[1]};
 `
 
 const InputContainer = styled.div`

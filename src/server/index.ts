@@ -3,5 +3,4 @@ import { server } from './app'
 
 require('dotenv').config()
 
-start(process.env)(server)()
-	.then(i => i())
+start(process.env)(server)().then((i) => i())

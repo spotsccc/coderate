@@ -14,14 +14,18 @@ export const deleteRefreshToken = (db: Database) => (tokenId: string) =>
 			DataBaseError.of,
 		),
 		TE.map((res) => {
-			console.dir(res, {depth: null})
+			console.dir(res, { depth: null })
 			return res
 		}),
 		TE.map((res) => A.head(res.rows)),
 		TE.map(
 			O.match(
 				() => E.left(new DBNotFoundError('Refresh token not found')),
-				(res) => E.right({ ...res, expires: new Date(res.expires) }),
+				(res) =>
+					E.right({
+						...res,
+						expires: new Date(res.expires),
+					}),
 			),
 		),
 	)

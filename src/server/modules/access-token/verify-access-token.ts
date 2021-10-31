@@ -1,6 +1,9 @@
-import {either as E} from 'fp-ts'
+import { either as E } from 'fp-ts'
 import { verify } from 'jsonwebtoken'
-import { AccessError } from '@server/shared/errors';
+import { AccessError } from '@server/shared/errors'
 
-// @ts-ignore
-export const verifyAccessToken = (secret: string) => (token: string): E.Either<Error, {id: string}> => E.tryCatch(() => verify(token, secret), AccessError.of)
+export const verifyAccessToken =
+	(secret: string) =>
+	(token: string): E.Either<Error, { id: string }> =>
+		//@ts-ignore
+		E.tryCatch(() => verify(token, secret), AccessError.of)

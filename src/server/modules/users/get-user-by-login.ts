@@ -5,20 +5,19 @@ import { DBNotFoundError, DataBaseError } from '@server/shared/errors'
 import { Database } from '@server/lib/controller/types'
 import { User } from './types'
 
-export const getUserByLogin =
-	(login: string) => (db: Database) =>
-		pipe(
-			TE.tryCatch(
-				() =>
-					db
-						.query<User>('SELECT * FROM users WHERE login = $1', [login])
-						.then((res) => A.head(res.rows)),
-				DataBaseError.of,
+export const getUserByLogin = (login: string) => (db: Database) =>
+	pipe(
+		TE.tryCatch(
+			() =>
+				db
+					.query<User>('SELECT * FROM users WHERE login = $1', [login])
+					.then((res) => A.head(res.rows)),
+			DataBaseError.of,
+		),
+		TE.chainEitherK(
+			O.match(
+				() => E.left(new DBNotFoundError('User not found')),
+				(user) => E.right(user),
 			),
-			TE.chainEitherK(
-				O.match(
-					() => E.left(new DBNotFoundError('User not found')),
-					(user) => E.right(user),
-				),
-			),
-		)
+		),
+	)

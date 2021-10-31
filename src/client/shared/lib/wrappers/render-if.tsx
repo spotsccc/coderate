@@ -1,5 +1,7 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-export const renderIf = <Props,>(Component: FC<Props>) => (props: Props & {renderIf: boolean}) => (<>
-	{props.renderIf && <Component {...props}/>}
-</>)
+export const renderIf =
+	<Props,>(f: (_: Props) => boolean) =>
+	(Component: FC<Props>) =>
+	(props: Props) =>
+		<>{f(props) && <Component {...props} />}</>

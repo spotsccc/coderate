@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { AuthPage } from '../auth-page'
-import { MainPage } from '../main-page'
+import { UserProfilePage } from '../user-profile-page'
+import { CalendarPage } from '../calendar-page'
 
 export type Route = {
 	path: string
@@ -14,8 +15,11 @@ export const router: Route[] = [
 		component: AuthPage,
 	},
 	{
-		path: '/',
-		component: MainPage,
-		exact: true
+		path: '/profile',
+		component: UserProfilePage,
+	},
+	{
+		path: '/calendar',
+		component: CalendarPage,
 	},
 ]
