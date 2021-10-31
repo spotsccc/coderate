@@ -1,0 +1,1 @@
+{"version":3,"file":"generate-access-token.js","sourceRoot":"","sources":["../../../../src/server/modules/access-token/generate-access-token.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,GAAG,MAAM,cAAc,CAAA;AAEnC,MAAM,CAAC,MAAM,mBAAmB,GAAG,CAAC,MAAc,EAAE,EAAE,CAAC,CAAC,EAAU,EAAE,EAAE,CACrE,GAAG,CAAC,IAAI,CAAC,EAAE,EAAE,EAAE,EAAE,MAAM,EAAE,EAAE,SAAS,EAAE,IAAI,EAAE,CAAC,CAAA"}

@@ -1,0 +1,2 @@
+export { $authState, $email, $emailHasError, changeEmail, $password, $passwordHasError, changePassword, $login, $loginHasError, changeLogin, $repeatPassword, $repeatPasswordHasError, changeRepeatPassword, changeAuthState, trySubmitForm, AuthState, } from './auth-from-state';
+//# sourceMappingURL=index.js.map
