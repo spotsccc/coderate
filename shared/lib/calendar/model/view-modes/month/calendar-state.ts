@@ -37,7 +37,6 @@ export const $today = createStore<Option<Day>>(O.none)
 export const $daysWithFilledSideWeeks = $selectedMonth.map(
 	O.map(flow(fillMonthSideWeeks, getMonthDays)),
 )
-$daysWithFilledSideWeeks.watch(console.log)
 
 $selectedMonth.on(calculateTodayFx.doneData, (_, day) =>
 	O.some(generateMonth(day.month)(day.year)),

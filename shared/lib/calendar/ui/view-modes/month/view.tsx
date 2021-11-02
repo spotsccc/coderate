@@ -11,7 +11,7 @@ export type Props = {
 }
 
 const MonthContainer = styled.div`
-	padding: ${indents[4]};
+	padding: 0 ${indents[4]};
 	height: 736px;
 	box-sizing: border-box;
 	display: grid;
