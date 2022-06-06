@@ -1,1 +1,5 @@
-export { AuthForm } from './auth-form'
+import { View } from './ui'
+
+export const AuthForm = {
+	View,
+}

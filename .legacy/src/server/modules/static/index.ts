@@ -1,1 +1,0 @@
-export { staticController } from './controller'

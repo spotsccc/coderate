@@ -1,15 +1,30 @@
-import type { NextPage } from 'next'
-import { fork } from 'effector'
+import { allSettled, fork, serialize } from 'effector'
+import { IndexPage } from '@/pages-fsd/index'
+import { setContext } from '@/shared/api/base-request'
+import { GetServerSidePropsContext } from 'next'
+import { option } from 'fp-ts'
 
-export const getStaticProps = () => {
+export default IndexPage.View
+
+export const getServerSideProps = async (
+	context: GetServerSidePropsContext,
+) => {
 	const scope = fork()
+	if (context.req && context.res) {
+		await allSettled(setContext, {
+			scope,
+			params: option.some(context),
+		})
+	}
+	await allSettled(IndexPage.pageLoadStarted, { scope })
+	await allSettled(IndexPage.pageLoaded, { scope })
+	await allSettled(setContext, {
+		scope,
+		params: option.none,
+	})
 	return {
-		props: {},
+		props: {
+			initialState: serialize(scope),
+		},
 	}
 }
-
-const Home: NextPage = () => {
-	return <div>kek</div>
-}
-
-export default Home

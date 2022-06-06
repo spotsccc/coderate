@@ -1,18 +1,21 @@
-import type { AppProps } from 'next/app'
+import { GlobalStyles } from '@mui/material'
+import { Scope, fork, serialize } from 'effector'
+import { Provider } from 'effector-react/scope'
 
-import { createGlobalStyle } from 'styled-components'
+let clientScope: Scope
 
-export const GlobalStyles = createGlobalStyle`
-  body {
-    margin: 0;
-  }
-`
-
-const MyApp = ({ Component, pageProps }: AppProps) => (
-	<>
-		<GlobalStyles />
-		<Component {...pageProps} />
-	</>
-)
-
-export default MyApp
+export default function App({ Component, pageProps }: any) {
+	const scope = fork({
+		values: {
+			...(clientScope && serialize(clientScope)),
+			...pageProps.initialState,
+		},
+	})
+	if (typeof window !== 'undefined') clientScope = scope
+	return (
+		<Provider value={scope}>
+			<Component {...pageProps} />
+			<GlobalStyles styles={{ margin: '0' }} />
+		</Provider>
+	)
+}
